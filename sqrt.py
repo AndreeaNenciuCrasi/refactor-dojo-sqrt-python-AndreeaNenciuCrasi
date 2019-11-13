@@ -1,32 +1,27 @@
-import random
 import math
 
-s = 0
-d = {}
+sum_sqrt = 0
+dictionary = {}
 with open('100.txt') as f:
-    for a in f:
-        p = ''
-        for b in a:
-            a_s = a.strip()
-            if b != ',':
-                p += b
+    for line in f:
+        complete_number = ''
+        for character in line:
+            no_spaces_line = line.strip()
+            if character != ',':
+                complete_number += character
             else:
-                if a_s not in d:
-                    d[a_s] = int(p)
+                if no_spaces_line not in dictionary:
+                    dictionary[no_spaces_line] = int(complete_number)
                 else:
-                    d[a_s] += int(p)
-                p = ''
-        if a_s not in d:
-            d[a_s] = int(p)
+                    dictionary[no_spaces_line] += int(complete_number)
+                complete_number = ''
+        if no_spaces_line not in dictionary:
+            dictionary[no_spaces_line] = int(complete_number)
         else:
-            d[a_s] += int(p)
+            dictionary[no_spaces_line] += int(complete_number)
 
-s += math.sqrt(d['23,21,5'])
-s += math.sqrt(d['342,2,5'])
-s += math.sqrt(d['32,1,777'])
-s += math.sqrt(d['234,645,223'])
-s += math.sqrt(d['243,646,2342'])
-s += math.sqrt(d['6346,3434,222'])
-s += math.sqrt(d['3,6,2'])
+for i in dictionary:
+    sum_sqrt += math.sqrt(dictionary[i])
 
-print(s)
+
+print(sum_sqrt)
